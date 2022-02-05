@@ -2,7 +2,13 @@ import React from 'react'
 import { store } from './App'
 
 const Navbar = () => {
-  const { user, setUser, setData } = React.useContext(store)
+  const {
+    user,
+    setUser,
+    setData,
+    buttonState,
+    setButtonState,
+  } = React.useContext(store)
   const handleDelete = (item) => {
     console.log(item, 'item', user)
     let filterdArr = user.filter((i) => i.id !== item.id)
@@ -11,6 +17,7 @@ const Navbar = () => {
   }
   const handleEdit = (item) => {
     setData(item)
+    setButtonState(true)
   }
 
   return (

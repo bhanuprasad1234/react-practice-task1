@@ -3,7 +3,14 @@ import React, { useContext } from 'react'
 import { store } from './App'
 
 const MainBody = () => {
-  const { user, setUser, data, setData } = useContext(store)
+  const {
+    user,
+    setUser,
+    data,
+    setData,
+    buttonState,
+    setButtonState,
+  } = useContext(store)
 
   //   console.log(user)
   //   const [data, setData] = React.useState({
@@ -22,6 +29,19 @@ const MainBody = () => {
       description: '',
       date: new Date().toLocaleDateString('en-US'),
     })
+  }
+  const update = () => {
+    let filterdArr = user.filter((i) => i.id !== data.id)
+    console.log(filterdArr, 'filterdArr')
+    // setUser(filterdArr.length > 0 ? filterdArr : [])
+    setUser([...filterdArr, data])
+    setData({
+      id: new Date().getTime(),
+      title: '',
+      description: '',
+      date: new Date().toLocaleDateString('en-US'),
+    })
+    setButtonState(false)
   }
   return (
     <div>
@@ -63,9 +83,9 @@ const MainBody = () => {
             <button
               type="button"
               className="btn btn-primary col-md-8"
-              onClick={() => submit()}
+              onClick={!buttonState ? () => submit() : () => update()}
             >
-              Submit
+              {!buttonState ? 'submit' : 'update'}
             </button>
           </div>
         </form>

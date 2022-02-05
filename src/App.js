@@ -11,8 +11,11 @@ const App = () => {
     description: '',
     date: new Date().toLocaleDateString('en-US'),
   })
+  const [buttonState, setButtonState] = React.useState(false)
   return (
-    <store.Provider value={{ user, setUser, data, setData }}>
+    <store.Provider
+      value={{ user, setUser, data, setData, buttonState, setButtonState }}
+    >
       <div className="row" style={{ width: '100%' }}>
         <div className="col-md-4">
           <Navbar></Navbar>
